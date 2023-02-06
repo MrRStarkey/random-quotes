@@ -1,30 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
 import { SocialIcon } from 'react-social-icons';
+import { useState } from 'react';
 
-function displayNewQuote () {
-  let quote = "";
-}
+
 
 function App() {
+
+  
+  let quotes = require('./quotes.json').quotes;
+  //console.log(quotes.length);
+   
+  const [currentQuote, setQuote] = useState({ quote: "quote", author: "author"});
+
+  const twitterLink = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
+  encodeURIComponent('"' + currentQuote.quote + '" ' + currentQuote.author);
+
+  function displayNewQuote () {
+    let i = Math.floor(Math.random() * quotes.length);
+    setQuote({
+      ...currentQuote,
+      quote: quotes[i].quote,
+      author: quotes[i].author
+    });
+    
+  }
+  
   return (
-    <wrapper id="quote-box" className="App">
-      <header id="text" className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="App">
+      <wrapper id="quote-box" className="App-header">
+        <quote id="text">"{currentQuote.quote}"</quote>
         <p id="author">
-          ~"author"
+          - {currentQuote.author}
         </p>
-        <button id='new-quote' text="new" onClick={displayNewQuote}>New Quote</button>
-        <a
-          id="tweet-quote"
-          href="http://www.twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <SocialIcon network="twitter" />
-        </a>
-      </header>
-    </wrapper>
+        <div className='buttonWrapper'>  
+          <a
+            id="tweet-quote"
+            href={twitterLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <SocialIcon network="twitter" />
+          </a>
+          <button id='new-quote' text="new" onClick={displayNewQuote}>New Quote</button>
+          
+        </div>
+      </wrapper>
+    </div>
   );
 }
 
