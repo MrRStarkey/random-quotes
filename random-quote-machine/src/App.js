@@ -1,24 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import { SocialIcon } from 'react-social-icons';
+
+function displayNewQuote () {
+  let quote = "";
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <wrapper id="quote-box" className="App">
+      <header id="text" className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+        <p id="author">
+          ~"author"
         </p>
+        <button id='new-quote' text="new" onClick={displayNewQuote}>New Quote</button>
         <a
-          className="App-link"
-          href="https://reactjs.org"
+          id="tweet-quote"
+          href="http://www.twitter.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          <SocialIcon network="twitter" />
         </a>
       </header>
-    </div>
+    </wrapper>
   );
 }
 
