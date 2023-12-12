@@ -10,8 +10,10 @@ function App() {
   
   let quotes = require('./quotes.json').quotes;
   //console.log(quotes.length);
-   
-  const [currentQuote, setQuote] = useState({ quote: "quote", author: "author"});
+  
+  let randomFirstQuote = Math.floor(Math.random() * quotes.length);
+  const [currentQuote, setQuote] = useState({ quote: quotes[randomFirstQuote].quote, author: quotes[randomFirstQuote].author});
+  
 
   const twitterLink = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
   encodeURIComponent('"' + currentQuote.quote + '" ' + currentQuote.author);
@@ -26,6 +28,8 @@ function App() {
     
   }
   
+  
+
   return (
     <div className="App">
       <wrapper id="quote-box" className="App-header">
